@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charles's 16-Bit World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'snes-blue-dark': '#0000aa',
+              'snes-blue-light': '#4444ff',
+              'genesis-black': '#111111',
+              'pixel-gold': '#ffcc00',
+              'pixel-red': '#cc0000',
+              'pixel-green': '#00cc00',
+            },
+            fontFamily: {
+              'pixel': ['"Press Start 2P"', 'cursive'],
+            },
+            animation: {
+              'float': 'float 3s ease-in-out infinite',
+              'blink-fast': 'blink 0.5s step-end infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              blink: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      body {
+        background-color: #202028;
+        color: #FFFFFF;
+        font-family: "Press Start 2P", cursive;
+        overflow-x: hidden;
+        cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAADNJREFUOE9jZKAQMFKon2HUQAyjBgxq4P///4+6OZrw0tISxsjIyEAlYDQ9jBowaMCoBQAAln88ER5F7YUAAAAASUVORK5CYII='), auto;
+        /* Pixelated scaling for images */
+        image-rendering: pixelated;
+      }
+      
+      /* Retro Scanline Overlay */
+      .scanlines::before {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+        background-size: 100% 4px;
+        z-index: 50;
+        pointer-events: none;
+      }
+
+      /* Custom Scrollbar for 16-bit feel */
+      ::-webkit-scrollbar {
+        width: 12px;
+        background: #000;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #4444ff;
+        border: 2px solid #ffffff;
+        border-radius: 4px;
+      }
+      
+      .bg-checkerboard {
+        background-image: 
+          linear-gradient(45deg, #1a1a1a 25%, transparent 25%), 
+          linear-gradient(-45deg, #1a1a1a 25%, transparent 25%), 
+          linear-gradient(45deg, transparent 75%, #1a1a1a 75%), 
+          linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
+        background-size: 20px 20px;
+        background-color: #2a2a2a;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root" class="h-screen w-screen scanlines bg-checkerboard"></div>
+  </body>
+</html>
